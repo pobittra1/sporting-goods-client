@@ -59,7 +59,9 @@ export function HeroSection() {
               <Card className="bg-transparent">
                 <CardContent className="md:flex sm:flex-row sm:items-center sm:justify-center gap-12 h-[500px] p-0">
                   <div className="py-4 flex flex-col gap-4 text-center">
-                    <p className="text-4xl">{slider.headingInfo}</p>
+                    <p className="text-3xl md:text-7xl text-white font-extrabold md:font-semibold">
+                      {slider.headingInfo}
+                    </p>
                     <p className="font-bold text-5xl text-gray-600">
                       {slider.discount} Discount
                     </p>
