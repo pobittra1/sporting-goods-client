@@ -1,6 +1,8 @@
 import { useGetProductsQuery } from "@/redux/api/baseApi";
 import ProductCard from "../ProductCard/ProductCard";
 import { TProduct } from "@/types";
+import Rating from "react-rating";
+import { Button } from "../ui/button";
 
 function ProductCardSection() {
   const { data, isLoading } = useGetProductsQuery({});
@@ -30,7 +32,7 @@ function ProductCardSection() {
             className="p-4 flex gap-2 flex-col  m-4"
             style={{
               boxShadow: "0px 0px 100px 100px rgba(0, 0, 0, 0.1)",
-              borderRadius: "6ox",
+              borderRadius: "6px",
             }}
           >
             <h1 className="text-xl capitalize font-semibold">{card.name}</h1>
@@ -50,9 +52,38 @@ function ProductCardSection() {
               src={card.image}
               alt=""
             />
+            <div className="flex justify-around">
+              <div>
+                <span className="text-xl font-semibold capitalize mr-2">
+                  Rating:
+                </span>
+                {card.rating}
+              </div>
+              <div>
+                <span className="text-xl font-semibold capitalize mr-2">
+                  Price:
+                </span>
+                {card.price}
+              </div>
+            </div>
+            <div>
+              <p>
+                <span className="text-xl font-semibold capitalize mr-2">
+                  Decription:
+                </span>
+                {card.description}
+              </p>
+            </div>
+            <div className="see-more-button text-center my-6">
+              <Button>View Details</Button>
+            </div>
           </div>
+
           //   <ProductCard key={card?._id} card={card}></ProductCard>
         ))}
+      </div>
+      <div className="see-more-button text-center my-6">
+        <Button>See More</Button>
       </div>
     </div>
   );
