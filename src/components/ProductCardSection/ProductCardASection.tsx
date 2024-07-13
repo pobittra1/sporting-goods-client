@@ -1,6 +1,8 @@
 import { useGetProductsQuery } from "@/redux/api/baseApi";
 import { TProduct } from "@/types";
 import { Button } from "../ui/button";
+import Rating from "react-rating";
+import { Star } from "lucide-react";
 function ProductCardSection() {
   const { data, isLoading } = useGetProductsQuery({});
   if (isLoading) {
@@ -16,13 +18,11 @@ function ProductCardSection() {
 
   return (
     <div>
-      <div
-        className="card-grid grid grid-cols-1 md:grid-cols-3 gap-4"
-        style={{
+      <div className="card-grid grid grid-cols-1 md:grid-cols-3 gap-4 bg-white">
+        {/* style={{
           backgroundImage:
             "linear-gradient(to right top, #d6c8d1, #d9c5c6, #d5c3bc, #ccc3b5, #bfc4b4)",
-        }}
-      >
+        }} */}
         {mainData.slice(0, 6).map((card: TProduct) => (
           <div
             key={card._id}
@@ -45,7 +45,7 @@ function ProductCardSection() {
               </h3>
             </div>
             <img
-              className="w-full py-8 h-[350px] object-cover hover:scale-105 ease-in duration-100"
+              className="w-full py-4 h-[220px] object-cover hover:scale-105 ease-in duration-100"
               src={card.image}
               alt=""
             />
@@ -54,7 +54,15 @@ function ProductCardSection() {
                 <span className="text-xl font-semibold capitalize mr-2">
                   Rating:
                 </span>
-                {card.rating}
+                {/* {card.rating} */}
+                {/* @ts-expect-error their is no type declaration file for react rating*/}
+                <Rating
+                  emptySymbol={<Star size={40} color="orange" />}
+                  fullSymbol={<Star size={40} color="orange" fill="orange" />}
+                  fractions={2}
+                  initialRating={card.rating}
+                  stop={10}
+                />
               </div>
               <div>
                 <span className="text-xl font-semibold capitalize mr-2">
@@ -71,7 +79,7 @@ function ProductCardSection() {
                 {card.description}
               </p>
             </div>
-            <div className="see-more-button text-center my-6">
+            <div className="see-more-button text-center my-2">
               <Button>View Details</Button>
             </div>
           </div>
