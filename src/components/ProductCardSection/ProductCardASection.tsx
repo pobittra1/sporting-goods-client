@@ -1,9 +1,6 @@
 import { useGetProductsQuery } from "@/redux/api/baseApi";
-import ProductCard from "../ProductCard/ProductCard";
 import { TProduct } from "@/types";
-import Rating from "react-rating";
 import { Button } from "../ui/button";
-
 function ProductCardSection() {
   const { data, isLoading } = useGetProductsQuery({});
   if (isLoading) {
@@ -16,7 +13,7 @@ function ProductCardSection() {
     );
   }
   const mainData = data.data;
-  console.log(mainData);
+
   return (
     <div>
       <div

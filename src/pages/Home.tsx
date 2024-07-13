@@ -1,3 +1,4 @@
+import Contact from "@/components/Contact/Contact";
 import Footer from "@/components/Footer/Footer";
 import { HeroSection } from "@/components/HeroSection/HeroSection";
 
@@ -16,10 +17,11 @@ function Home() {
       <div className="mx-auto max-w-[1280px]">
         <Navbar></Navbar>
         <HeroSection></HeroSection>
-        <h2 className="text-center text-3xl border-b-2 mb-6 pb-2 border-b-black">
+        <h2 className="text-center text-3xl font-extrabold text-gray-900 mb-6 mt-12">
           Latest Products
         </h2>
         <ProductCardSection></ProductCardSection>
+        <Contact></Contact>
         <Footer></Footer>
       </div>
     </>

@@ -19,7 +19,7 @@ const Footer = () => {
               </span>
               to Elite{" "}
               <span className="text-black font-semibold">Sporting goods.</span>
-              <p className="font-thin">
+              <p className="mt-2 text-sm">
                 Your one-stop shop for all your sporting needs! Whether you're
                 an avid athlete, a weekend warrior, or just starting your
                 fitness journey, we have everything you need to excel in your
