@@ -1,6 +1,7 @@
 import { AlignRight, X } from "lucide-react";
 import { useState } from "react";
 import logo from "../../assets/logo.png";
+import { styles } from "@/css/styles";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -35,28 +36,16 @@ const Navbar = () => {
             </div>
             <div className="hidden sm:block sm:ml-6 mt-2">
               <div className="flex space-x-6">
-                <a
-                  href="#"
-                  className="relative after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-full after:bg-black after:scale-x-0 after:origin-bottom-right after:transition-transform after:duration-300 hover:after:origin-bottom-left hover:after:scale-x-100"
-                >
+                <a href="#" className={`${styles.underlineAnim} `}>
                   Home
                 </a>
-                <a
-                  href="#"
-                  className="relative after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-full after:bg-black after:scale-x-0 after:origin-bottom-right after:transition-transform after:duration-300 hover:after:origin-bottom-left hover:after:scale-x-100"
-                >
+                <a href="#" className={`${styles.underlineAnim} `}>
                   About
                 </a>
-                <a
-                  href="#"
-                  className="relative after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-full after:bg-black after:scale-x-0 after:origin-bottom-right after:transition-transform after:duration-300 hover:after:origin-bottom-left hover:after:scale-x-100"
-                >
+                <a href="#" className={`${styles.underlineAnim} `}>
                   Services
                 </a>
-                <a
-                  href="#"
-                  className="relative after:absolute after:left-0 after:bottom-0 after:h-0.5 after:w-full after:bg-black after:scale-x-0 after:origin-bottom-right after:transition-transform after:duration-300 hover:after:origin-bottom-left hover:after:scale-x-100"
-                >
+                <a href="#" className={`${styles.underlineAnim} `}>
                   Contact
                 </a>
               </div>
