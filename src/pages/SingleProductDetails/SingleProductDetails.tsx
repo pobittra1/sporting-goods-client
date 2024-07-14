@@ -1,11 +1,13 @@
 import CardDetails from "@/components/CardDetails/CardDetails";
-import CategoryProduct from "@/components/CategoryProduct/CategoryProduct";
-
 function SingProductDetails() {
   return (
     <div>
       <CardDetails></CardDetails>
-      <CategoryProduct></CategoryProduct>
+      <div className="my-16">
+        <h2 className="text-3xl text-center font-bold my-4">
+          Get your product here by select category
+        </h2>
+      </div>
     </div>
   );
 }

@@ -1,14 +1,7 @@
 import Contact from "@/components/Contact/Contact";
 import { HeroSection } from "@/components/HeroSection/HeroSection";
 import ProductCardSection from "@/components/ProductCardSection/ProductCardASection";
-import { useGetProductsQuery } from "@/redux/api/baseApi";
-
 function Home() {
-  const { data, isLoading } = useGetProductsQuery({});
-  if (isLoading) {
-    console.log("Loading.....");
-  }
-  console.log(data);
   return (
     <>
       <HeroSection></HeroSection>
