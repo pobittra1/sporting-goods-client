@@ -1,6 +1,8 @@
 import { useGetSingleProductQuery } from "@/redux/api/baseApi";
 import { useParams } from "react-router-dom";
 import { Button } from "../ui/button";
+import { Star } from "lucide-react";
+import Rating from "react-rating";
 
 // type ProductCardProps = {
 //   name: string;
@@ -26,7 +28,6 @@ const CardDetails = () => {
     );
   }
   const product = data.data;
-  console.log(product);
   const {
     name,
     image,
@@ -57,7 +58,14 @@ const CardDetails = () => {
         </div>
         <div className="mt-2">
           <span className="text-gray-600">Rating: </span>
-          <span className="font-semibold">{rating} / 5</span>
+          {/* @ts-expect-error their is no type declaration file for react rating*/}
+          <Rating
+            emptySymbol={<Star size={15} color="orange" />}
+            fullSymbol={<Star size={15} color="orange" fill="orange" />}
+            fractions={2}
+            initialRating={rating}
+            stop={10}
+          />
         </div>
         <div className="mt-2">
           <span className="text-gray-600">Price: </span>
