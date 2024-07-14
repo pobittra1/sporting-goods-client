@@ -1,6 +1,6 @@
-import CardDetails from "@/components/CardDetails/CardDetails";
 import MainLayout from "@/components/Layouts/MainLayout/MainLayout";
 import Home from "@/pages/Home";
+import SingProductDetails from "@/pages/SingleProductDetails/SingleProductDetails";
 
 import { createBrowserRouter } from "react-router-dom";
 const router = createBrowserRouter([
@@ -14,7 +14,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/product/:id",
-        element: <CardDetails></CardDetails>,
+        element: <SingProductDetails></SingProductDetails>,
       },
     ],
   },
