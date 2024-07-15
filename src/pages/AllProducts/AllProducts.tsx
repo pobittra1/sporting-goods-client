@@ -3,10 +3,24 @@ import { TProduct } from "@/types";
 import { Button } from "../../components/ui/button";
 import Rating from "react-rating";
 import { Star } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import Contact from "@/components/Contact/Contact";
 
-function ProductCardSection() {
-  const { data, isLoading } = useGetProductsQuery({});
+function AllProduct() {
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const category = searchParams.get("category");
+  console.log(category);
+  const currentPath = window.location.pathname;
+
+  // Extracting the last segment of the URL path
+  const segments = currentPath.split("/").filter((segment) => segment !== "");
+  console.log(segments);
+  const lastSegment = segments[0];
+  console.log(lastSegment);
+  const { data, isLoading } = useGetProductsQuery(
+    category ? { category } : undefined
+  );
   if (isLoading) {
     return (
       <div>
@@ -18,23 +32,34 @@ function ProductCardSection() {
   }
   const mainData = data.data;
 
+  const products = lastSegment === "product" ? mainData : mainData.slice(0, 6);
+
   return (
     <div>
+      {lastSegment === "product" ? (
+        <h2 className="text-3xl text-center font-bold my-4 capitalize">
+          all products
+        </h2>
+      ) : (
+        <h2 className="text-3xl text-center font-bold my-4 capitalize">
+          Latest product
+        </h2>
+      )}
       <div
-        className="card-grid grid grid-cols-1 md:grid-cols-3 gap-4 bg-white "
-        // style={{
-        //   backgroundImage:
-        //     "linear-gradient(to right top, #d6c8d1, #d9c5c6, #d5c3bc, #ccc3b5, #bfc4b4)",
-        // }}
+        className="card-grid grid grid-cols-1 md:grid-cols-3 gap-4 "
+        style={{
+          backgroundImage:
+            "linear-gradient(to right top, #d6c8d1, #d9c5c6, #d5c3bc, #ccc3b5, #bfc4b4)",
+        }}
       >
-        {mainData.slice(0, 6).map((card: TProduct) => (
+        {products.map((card: TProduct) => (
           <div
             key={card._id}
-            className="p-4 flex gap-2 flex-col  m-4"
-            style={{
-              boxShadow: "0px 0px 100px 100px rgba(0, 0, 0, 0.1)",
-              borderRadius: "6px",
-            }}
+            className="p-4 flex gap-2 flex-col  m-4 bg-white rounded-md"
+            // style={{
+            //   boxShadow: "0px 0px 100px 100px rgba(0, 0, 0, 0.1)",
+            //   borderRadius: "6px",
+            // }}
           >
             <h1 className="text-xl capitalize font-semibold">{card.name}</h1>
             <div className="flex gap-2">
@@ -89,11 +114,19 @@ function ProductCardSection() {
           //   <ProductCard key={card?._id} card={card}></ProductCard>
         ))}
       </div>
-      <div className="see-more-button text-center my-6">
-        <Button>See More</Button>
-      </div>
+      {/* if we do slice product, then we need to show see more button */}
+      {lastSegment !== "product" ? (
+        <div className="see-more-button text-center my-6">
+          <Link to={"/product"}>
+            <Button>See More</Button>
+          </Link>
+        </div>
+      ) : (
+        <div></div>
+      )}
+      {lastSegment === "product" ? <Contact></Contact> : ""}
     </div>
   );
 }
 
-export default ProductCardSection;
+export default AllProduct;

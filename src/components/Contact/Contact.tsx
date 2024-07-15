@@ -2,7 +2,7 @@ import { Button } from "../ui/button";
 
 function Contact() {
   return (
-    <div>
+    <div className="my-12">
       <div
         className="bg-gradient-to-r from-blue-500 min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
         style={{

@@ -3,7 +3,13 @@ import logo from "../../assets/logo.png";
 import { Facebook, Linkedin, Send, Twitter } from "lucide-react";
 const Footer = () => {
   return (
-    <footer className="bg-gray-400 text-white p-8 w-full">
+    <footer
+      className=" text-white p-8 w-full"
+      style={{
+        backgroundImage:
+          "linear-gradient(to right top, #d6c8d1, #d9c5c6, #d5c3bc, #ccc3b5, #bfc4b4)",
+      }}
+    >
       <div className="footer-section flex flex-col md:flex-row justify-between">
         <div className="w-full md:w-6/12 mb-8 md:mb-0">
           <div className="logo-area w-full md:w-6/12">
@@ -19,7 +25,7 @@ const Footer = () => {
               </span>
               to Elite{" "}
               <span className="text-black font-semibold">Sporting goods.</span>
-              <p className="mt-2 text-sm">
+              <p className="mt-2 text-sm text-gray-600">
                 Your one-stop shop for all your sporting needs! Whether you're
                 an avid athlete, a weekend warrior, or just starting your
                 fitness journey, we have everything you need to excel in your

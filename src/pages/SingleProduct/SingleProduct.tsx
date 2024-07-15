@@ -24,7 +24,7 @@ function SingProduct() {
               src={basketball}
               alt="basketball image here"
             />
-            <Link to={`/product/category/Basketball`}>
+            <Link to={`/product?category=Basketball`}>
               <Button className="bg-transparent border text-black hover:text-white">
                 Basketball
               </Button>
@@ -39,7 +39,7 @@ function SingProduct() {
               src={football}
               alt="football image here"
             />
-            <Link to={`/product/category/Football`}>
+            <Link to={`/product?category/Football`}>
               <Button className="bg-transparent border text-black hover:text-white">
                 Football
               </Button>
@@ -50,7 +50,7 @@ function SingProduct() {
             style={{ boxShadow: "0px 10px 100px 72px rgba(0,0,0,0.1)" }}
           >
             <img className="w-[60px]" src={tennis} alt="tennis image here" />
-            <Link to={`/product/category/Tennis`}>
+            <Link to={`/product?category/Tennis`}>
               <Button className="bg-transparent border text-black hover:text-white">
                 Tennis
               </Button>
@@ -65,7 +65,7 @@ function SingProduct() {
               src={volleyball}
               alt="volleyball image here"
             />
-            <Link to={`/product/category/Volleyball`}>
+            <Link to={`/product?category/Volleyball`}>
               <Button className="bg-transparent border text-black hover:text-white">
                 Volleyball
               </Button>

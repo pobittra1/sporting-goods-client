@@ -8,10 +8,11 @@ export const baseApi = createApi({
   tagTypes: ["product"],
   endpoints: (builder) => ({
     getProducts: builder.query({
-      query: () => ({
-        method: "GET",
-        url: "/product",
-      }),
+      query: (data = {}) => {
+        return data?.category
+          ? `/product?category=${data?.category}`
+          : "/product";
+      },
       providesTags: ["product"],
     }),
     getSingleProduct: builder.query({
@@ -20,13 +21,17 @@ export const baseApi = createApi({
         method: "GET",
       }),
     }),
-    // getProductByCategory: builder.query({
-    //   query: (category) => ({
-    //     url: `/product/category/${category}`,
-    //     method: "GET",
-    //   }),
-    // }),
+    getProductByCategory: builder.query({
+      query: (category) => ({
+        url: `/product?category=${category}`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useGetProductsQuery, useGetSingleProductQuery } = baseApi;
+export const {
+  useGetProductsQuery,
+  useGetSingleProductQuery,
+  useGetProductByCategoryQuery,
+} = baseApi;
