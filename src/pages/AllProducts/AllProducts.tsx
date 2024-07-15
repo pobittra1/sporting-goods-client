@@ -1,6 +1,6 @@
 import { useGetProductsQuery } from "@/redux/api/baseApi";
 import { TProduct } from "@/types";
-import { Button } from "../ui/button";
+import { Button } from "../../components/ui/button";
 import Rating from "react-rating";
 import { Star } from "lucide-react";
 import { Link } from "react-router-dom";

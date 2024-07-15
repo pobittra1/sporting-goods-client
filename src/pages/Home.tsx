@@ -1,6 +1,6 @@
 import Contact from "@/components/Contact/Contact";
 import { HeroSection } from "@/components/HeroSection/HeroSection";
-import ProductCardSection from "@/components/ProductCardSection/ProductCardASection";
+import ProductCardSection from "@/pages/AllProducts/AllProducts";
 function Home() {
   return (
     <>

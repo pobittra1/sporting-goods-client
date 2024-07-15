@@ -2,6 +2,7 @@ import { AlignRight, X } from "lucide-react";
 import { useState } from "react";
 import logo from "../../assets/logo.png";
 import { styles } from "@/css/styles";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -30,9 +31,9 @@ const Navbar = () => {
           </div>
           <div className="flex-1 flex items-center justify-start sm:items-stretch sm:justify-between">
             <div className="flex-shrink-0 w-[200px]">
-              <a href="#" className="text-white font-bold text-xs">
+              <Link to={"/"} className="text-white font-bold text-xs">
                 <img src={logo} alt="logo image here" />
-              </a>
+              </Link>
             </div>
             <div className="hidden sm:block sm:ml-6 mt-2">
               <div className="flex space-x-6">

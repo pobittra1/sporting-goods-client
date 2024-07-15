@@ -71,9 +71,15 @@ const CardDetails = () => {
           <span className="text-gray-600">Price: </span>
           <span className="font-semibold">{price}</span>
         </div>
-        <div className="pt-4 pb-2">
-          <Button>Add To Cart</Button>
-        </div>
+        {
+          <div
+            className={` py-2 rounded ${
+              stockQuantity <= 0 ? "opacity-50 cursor-not-allowed" : ""
+            }`}
+          >
+            <Button>Add To Cart</Button>
+          </div>
+        }
       </div>
     </div>
   );

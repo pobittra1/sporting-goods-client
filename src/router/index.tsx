@@ -1,8 +1,7 @@
 import MainLayout from "@/components/Layouts/MainLayout/MainLayout";
 import Home from "@/pages/Home";
-import SingProductDetails from "@/pages/SingleProductDetails/SingleProductDetails";
-
 import { createBrowserRouter } from "react-router-dom";
+import SingProduct from "@/pages/SingleProduct/SingleProduct";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -14,7 +13,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/product/:id",
-        element: <SingProductDetails></SingProductDetails>,
+        element: <SingProduct></SingProduct>,
       },
     ],
   },
