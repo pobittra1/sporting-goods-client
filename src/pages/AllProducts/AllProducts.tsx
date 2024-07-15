@@ -8,14 +8,11 @@ import Contact from "@/components/Contact/Contact";
 import { useState } from "react";
 
 function AllProduct() {
-  // const [searchTerm, setSearchTerm] = useState("");
-  // const [selectedCategory, setSelectedCategory] = useState("");
-
   const location = useLocation();
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [selectedCategory, setSelectedCategory] = useState<string>("");
-  console.log(selectedCategory);
-  const [sortBy, setSortBy] = useState<"price-asc" | "price-desc">("price-asc");
+  const [selectedBrand, setSelectedBrand] = useState<string>("");
+  const [selectedRating, setSelectedRating] = useState<number>(0);
   const searchParams = new URLSearchParams(location.search);
   const category = searchParams.get("category");
   const currentPath = window.location.pathname;
@@ -37,31 +34,8 @@ function AllProduct() {
   }
   const mainData = data.data;
 
-  // const filteredProducts = mainData.filter((product: TProduct) =>
-  //   product.name.toLowerCase().includes(searchTerm.toLowerCase())
-  // );
-  // const filteredByCategory = selectedCategory
-  //   ? mainData.filter(
-  //       (product: TProduct) => product.category === selectedCategory
-  //     )
-  //   : mainData;
-
-  // let products;
-  // if (filteredProducts) {
-  //   products =
-  //     lastSegment === "product"
-  //       ? filteredProducts
-  //       : filteredProducts.slice(0, 6);
-  // } else if (filteredByCategory) {
-  //   products =
-  //     lastSegment === "product"
-  //       ? filteredByCategory
-  //       : filteredByCategory.slice(0, 6);
-  // }
-
   const products = lastSegment === "product" ? mainData : mainData.slice(0, 6);
 
-  // Filtered products based on search term and selected category
   let filteredProducts = [...products];
 
   const categgoryUniqueByKey = [
@@ -69,6 +43,17 @@ function AllProduct() {
       products.map((item: TProduct) => [item.category, item._id, item])
     ).keys(),
   ];
+  const brandUniqueByKey = [
+    ...new Map(
+      products.map((item: TProduct) => [item.brand, item._id, item])
+    ).keys(),
+  ];
+  const ratingUniqueByKey = [
+    ...new Map(
+      products.map((item: TProduct) => [item.rating, item._id, item])
+    ).keys(),
+  ];
+  console.log(ratingUniqueByKey);
 
   if (searchTerm.trim() !== "") {
     filteredProducts = mainData.filter((product: TProduct) =>
@@ -82,17 +67,25 @@ function AllProduct() {
     );
   }
 
-  // Sorting products
-  if (sortBy === "price-desc") {
-    filteredProducts.sort((a, b) => b.price - a.price);
-  } else {
-    filteredProducts.sort((a, b) => a.price - b.price);
+  //filtering on brand
+  if (selectedBrand !== "") {
+    filteredProducts = mainData.filter(
+      (product: TProduct) => product.brand === selectedBrand
+    );
+  }
+  //filtering on rating
+  if (selectedRating !== 0) {
+    filteredProducts = mainData.filter(
+      (product: TProduct) => product.rating === selectedRating
+    );
   }
 
   // Clear filters function
   const clearFilters = () => {
     setSearchTerm("");
     setSelectedCategory("");
+    setSelectedBrand("");
+    setSelectedRating(0);
     // Reset other filter states as needed
   };
 
@@ -109,7 +102,7 @@ function AllProduct() {
       )}
       {/* ------------------------------------ */}
       {/* Filter and sort controls */}
-      <div className="flex flex-wrap justify-between mb-4">
+      <div className="flex flex-wrap justify-between mb-4 mx-8">
         <input
           type="text"
           placeholder="Search by name..."
@@ -122,7 +115,7 @@ function AllProduct() {
           onChange={(e) => setSelectedCategory(e.target.value)}
           className="p-2 border border-gray-300 rounded-md mr-2 mb-2 md:mb-0 w-full md:w-auto"
         >
-          <option value="all-categories">All Categories</option>
+          <option value="all-categories">Categories Here</option>
           {categgoryUniqueByKey.map((category, index) => (
             <option
               key={index}
@@ -132,18 +125,30 @@ function AllProduct() {
               {category as string}
             </option>
           ))}
-          {/* Render your categories dynamically */}
-          {/* Example: <option value="basketball">Basketball</option> */}
         </select>
         <select
-          value={sortBy}
-          onChange={(e) =>
-            setSortBy(e.target.value as "price-asc" | "price-desc")
-          }
+          value={selectedBrand}
+          onChange={(e) => setSelectedBrand(e.target.value)}
           className="p-2 border border-gray-300 rounded-md mr-2 mb-2 md:mb-0 w-full md:w-auto"
         >
-          <option value="price-asc">Price: Low to High</option>
-          <option value="price-desc">Price: High to Low</option>
+          <option value="all-categories">Brands Here</option>
+          {brandUniqueByKey.map((brand, index) => (
+            <option key={index} value={brand as string} className="text-black">
+              {brand as string}
+            </option>
+          ))}
+        </select>
+        <select
+          value={selectedRating}
+          onChange={(e) => setSelectedRating(Number(e.target.value))}
+          className="p-2 border border-gray-300 rounded-md mr-2 mb-2 md:mb-0 w-full md:w-auto"
+        >
+          <option value="all-categories">Rating Here</option>
+          {ratingUniqueByKey.map((rating, index) => (
+            <option key={index} value={rating as number} className="text-black">
+              {rating as number}
+            </option>
+          ))}
         </select>
         <button
           onClick={clearFilters}
