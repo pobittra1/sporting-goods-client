@@ -157,61 +157,21 @@ function AllProduct() {
           Clear Filters
         </button>
       </div>
-
-      {/* Product grid */}
-      {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {filteredProducts.map(product => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </div> */}
-      {/* search filter sort area */}
-      {/* <div className="relative my-12 flex items-center left-8">
-        <input
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          type="text"
-          placeholder="Search your product by name..."
-          className="w-[300px] py-2 px-4 ps-12 border-b-2 border-gray-300 shadow-sm outline-none"
-        />
-        <button
-          type="submit"
-          className="absolute left-4 top-0 mt-3 mr-4 text-gray-300"
-        >
-          <Search></Search>
-        </button>
-      </div> */}
-      {/* Filter */}
-      {/* <div className="relative my-12 flex items-center left-8">
-        <input
-          value={selectedCategory}
-          onChange={(e) => setSelectedCategory(e.target.value)}
-          type="text"
-          placeholder="Search your product by name..."
-          className="w-[300px] py-2 px-4 ps-12 border-b-2 border-gray-300 shadow-sm outline-none"
-        />
-        <button
-          type="submit"
-          className="absolute left-4 top-0 mt-3 mr-4 text-gray-300"
-        >
-          <Search></Search>
-        </button>
-      </div> */}
-
       <div
-        className="card-grid grid grid-cols-1 md:grid-cols-3 gap-4 "
-        style={{
-          backgroundImage:
-            "linear-gradient(to right top, #d6c8d1, #d9c5c6, #d5c3bc, #ccc3b5, #bfc4b4)",
-        }}
+        className="card-grid grid grid-cols-1 md:grid-cols-3 gap-4 bg-white"
+        // style={{
+        //   backgroundImage:
+        //     "linear-gradient(to right top, #d6c8d1, #d9c5c6, #d5c3bc, #ccc3b5, #bfc4b4)",
+        // }}
       >
         {filteredProducts.map((card: TProduct) => (
           <div
             key={card._id}
             className="p-4 flex gap-2 flex-col  m-4 bg-white rounded-md"
-            // style={{
-            //   boxShadow: "0px 0px 100px 100px rgba(0, 0, 0, 0.1)",
-            //   borderRadius: "6px",
-            // }}
+            style={{
+              boxShadow: "0px 0px 100px 100px rgba(0, 0, 0, 0.1)",
+              borderRadius: "6px",
+            }}
           >
             <h1 className="text-xl capitalize font-semibold">{card.name}</h1>
             <div className="flex gap-2">

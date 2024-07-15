@@ -27,6 +27,13 @@ export const baseApi = createApi({
         method: "GET",
       }),
     }),
+    addCartProduct: builder.mutation({
+      query: (cartProduct) => ({
+        url: "/product/add-product-to-cart",
+        method: "POST",
+        body: cartProduct,
+      }),
+    }),
   }),
 });
 
@@ -34,4 +41,5 @@ export const {
   useGetProductsQuery,
   useGetSingleProductQuery,
   useGetProductByCategoryQuery,
+  useAddCartProductMutation,
 } = baseApi;
