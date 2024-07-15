@@ -2,22 +2,21 @@ import { useGetProductsQuery } from "@/redux/api/baseApi";
 import { TProduct } from "@/types";
 import { Button } from "../../components/ui/button";
 import Rating from "react-rating";
-import { Star } from "lucide-react";
+import { Search, Star } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import Contact from "@/components/Contact/Contact";
-
+import { useState } from "react";
 function AllProduct() {
+  const [searchTerm, setSearchTerm] = useState("");
+
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const category = searchParams.get("category");
-  console.log(category);
   const currentPath = window.location.pathname;
 
   // Extracting the last segment of the URL path
   const segments = currentPath.split("/").filter((segment) => segment !== "");
-  console.log(segments);
   const lastSegment = segments[0];
-  console.log(lastSegment);
   const { data, isLoading } = useGetProductsQuery(
     category ? { category } : undefined
   );
@@ -32,7 +31,12 @@ function AllProduct() {
   }
   const mainData = data.data;
 
-  const products = lastSegment === "product" ? mainData : mainData.slice(0, 6);
+  const filteredProducts = mainData.filter((product: TProduct) =>
+    product.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const products =
+    lastSegment === "product" ? filteredProducts : filteredProducts.slice(0, 6);
 
   return (
     <div>
@@ -45,6 +49,22 @@ function AllProduct() {
           Latest product
         </h2>
       )}
+      {/* search filter sort area */}
+      <div className="relative my-12 flex items-center left-8">
+        <input
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          type="text"
+          placeholder="Search your product by name..."
+          className="w-[300px] py-2 px-4 ps-12 border-b-2 border-gray-300 shadow-sm outline-none"
+        />
+        <button
+          type="submit"
+          className="absolute left-4 top-0 mt-3 mr-4 text-gray-300"
+        >
+          <Search></Search>
+        </button>
+      </div>
       <div
         className="card-grid grid grid-cols-1 md:grid-cols-3 gap-4 "
         style={{

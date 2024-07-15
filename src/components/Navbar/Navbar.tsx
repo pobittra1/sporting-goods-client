@@ -58,12 +58,12 @@ const Navbar = () => {
       {/* Mobile menu */}
       <div className={`sm:hidden ${isOpen ? "block text-right" : "hidden"}`}>
         <div className="px-2 pt-2 pb-3 space-y-1">
-          <a
-            href="#"
+          <Link
+            to={"/"}
             className="text-black hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
           >
             Home
-          </a>
+          </Link>
           <Link
             to={`/about-us`}
             className="text-black hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
