@@ -3,6 +3,7 @@ import Home from "@/pages/Home";
 import { createBrowserRouter } from "react-router-dom";
 import SingProduct from "@/pages/SingleProduct/SingleProduct";
 import AllProduct from "@/pages/AllProducts/AllProducts";
+import AboutUs from "@/pages/AboutUs/AboutUs";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -20,10 +21,10 @@ const router = createBrowserRouter([
         path: "/product/:id",
         element: <SingProduct></SingProduct>,
       },
-      // {
-      //   path: "/product?category",
-      //   element: <SingProduct></SingProduct>,
-      // },
+      {
+        path: "/about-us",
+        element: <AboutUs></AboutUs>,
+      },
     ],
   },
 ]);

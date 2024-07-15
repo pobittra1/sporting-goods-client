@@ -64,12 +64,12 @@ const Navbar = () => {
           >
             Home
           </a>
-          <a
-            href="#"
+          <Link
+            to={`/about-us`}
             className="text-black hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
           >
             About
-          </a>
+          </Link>
           <a
             href="#"
             className="text-black hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
