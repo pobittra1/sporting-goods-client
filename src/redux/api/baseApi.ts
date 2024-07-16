@@ -33,6 +33,7 @@ export const baseApi = createApi({
         method: "POST",
         body: cartProduct,
       }),
+      invalidatesTags: ["product"],
     }),
   }),
 });

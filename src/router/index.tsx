@@ -27,7 +27,7 @@ const router = createBrowserRouter([
         element: <AboutUs></AboutUs>,
       },
       {
-        path: "/manage-product",
+        path: "/product/add-product-to-cart",
         element: <ManageProducts></ManageProducts>,
       },
     ],
