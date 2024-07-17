@@ -1,4 +1,7 @@
-import { useGetCartProductsQuery } from "@/redux/api/baseApi";
+import {
+  useGetCartProductsQuery,
+  useUpdateQuantityMutation,
+} from "@/redux/api/baseApi";
 import { Star } from "lucide-react";
 import { Button } from "../ui/button";
 import { TProductCart } from "@/types";
@@ -7,8 +10,13 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 function AllCartProducts() {
-  const [quantity, setQuantity] = useState(0);
   const { data, isLoading } = useGetCartProductsQuery({});
+  const [quantities, setQuantities] = useState<{ [key: string]: number }>({});
+  const [genuineUpdatedQuantity] = useUpdateQuantityMutation();
+  console.log(quantities);
+
+  // implement here -----------------------------
+  console.log(Object.values(quantities));
   if (isLoading) {
     return (
       <div>
@@ -18,9 +26,44 @@ function AllCartProducts() {
       </div>
     );
   }
-  const mainData = data.data;
 
-  console.log(mainData);
+  const mainData = data.data;
+  // console.log(mainData);
+  // const updatedQuantity = Object.values(quantities)[0];
+  const handleIncrease = (id: string) => {
+    const newQuantity = (quantities[id] || 0) + 1;
+    setQuantities((prevQuantities) => ({
+      ...prevQuantities,
+      [id]: newQuantity,
+    }));
+    updateQuantity(id, newQuantity);
+  };
+
+  const handleDecrease = (id: string) => {
+    const newQuantity = Math.max((quantities[id] || 0) - 1, 0);
+    setQuantities((prevQuantities) => ({
+      ...prevQuantities,
+      [id]: newQuantity,
+    }));
+    updateQuantity(id, newQuantity);
+  };
+
+  const handleQuantityChange = (id: string, value: number) => {
+    setQuantities((prevQuantities) => ({
+      ...prevQuantities,
+      [id]: value,
+    }));
+    updateQuantity(id, value);
+  };
+
+  const updateQuantity = async (id: string, quantity: number) => {
+    const data = {
+      quantity: quantity,
+    };
+    console.log("form", data);
+    const du = await genuineUpdatedQuantity({ id, data });
+    console.log(du);
+  };
 
   return (
     <div className="card-grid grid grid-cols-1 md:grid-cols-3 gap-4 bg-white">
@@ -53,8 +96,7 @@ function AllCartProducts() {
           <div className="flex justify-around">
             <div>
               <span className=" font-semibold capitalize mr-2">Rating:</span>
-              {/* {card.rating} */}
-              {/* @ts-expect-error their is no type declaration file for react rating*/}
+              {/* @ts-expect-error there is no type declaration file for react rating*/}
               <Rating
                 emptySymbol={<Star size={15} color="orange" />}
                 fullSymbol={<Star size={15} color="orange" fill="orange" />}
@@ -71,7 +113,7 @@ function AllCartProducts() {
           <div>
             <p>
               <span className="text-xl font-semibold capitalize mr-2">
-                Decription:
+                Description:
               </span>
               {card.description}
             </p>
@@ -81,16 +123,32 @@ function AllCartProducts() {
               <span className="text-xl font-semibold capitalize mr-2">
                 Quantity:
               </span>
+              {/* {Number(card.quantity) + Number(updatedQuantity)} */}
               {card.quantity}
             </p>
           </div>
-          <div>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => handleDecrease(card._id)}
+              className="bg-gray-200 px-2 py-1 rounded"
+            >
+              -
+            </button>
             <input
-              value={quantity}
-              onChange={(e) => setQuantity(Number(e.target.value))}
+              value={quantities[card._id] || 0}
+              onChange={(e) =>
+                handleQuantityChange(card._id, Number(e.target.value))
+              }
               placeholder="Quantity"
               type="number"
+              className="w-12 text-center"
             />
+            <button
+              onClick={() => handleIncrease(card._id)}
+              className="bg-gray-200 px-2 py-1 rounded"
+            >
+              +
+            </button>
           </div>
           <div className="see-more-button text-center my-2">
             <Link to={`/product/${card?.product}`}>

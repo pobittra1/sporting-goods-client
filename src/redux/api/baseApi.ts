@@ -28,11 +28,14 @@ export const baseApi = createApi({
       }),
     }),
     addCartProduct: builder.mutation({
-      query: (cartProduct) => ({
-        url: "product/add-product",
-        method: "POST",
-        body: cartProduct,
-      }),
+      query: (cartProduct) => {
+        console.log(cartProduct);
+        return {
+          url: "product/add-product",
+          method: "POST",
+          body: cartProduct,
+        };
+      },
       invalidatesTags: ["product"],
     }),
     updateProduct: builder.mutation({
@@ -49,6 +52,16 @@ export const baseApi = createApi({
       }),
       providesTags: ["product"],
     }),
+    updateQuantity: builder.mutation({
+      query: ({ id, data }) => {
+        console.log(id, data);
+        return {
+          url: `/product/quantity/${id}`,
+          method: "PATCH",
+          body: data,
+        };
+      },
+    }),
   }),
 });
 
@@ -59,4 +72,5 @@ export const {
   useAddCartProductMutation,
   useUpdateProductMutation,
   useGetCartProductsQuery,
+  useUpdateQuantityMutation,
 } = baseApi;
