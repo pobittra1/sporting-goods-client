@@ -35,6 +35,20 @@ export const baseApi = createApi({
       }),
       invalidatesTags: ["product"],
     }),
+    updateProduct: builder.mutation({
+      query: ({ id, ...updatedProduct }) => ({
+        url: `product/${id}`,
+        method: "PATCH",
+        body: updatedProduct,
+      }),
+    }),
+    getCartProducts: builder.query({
+      query: () => ({
+        url: `/product/cart-products/product`,
+        method: "GET",
+      }),
+      providesTags: ["product"],
+    }),
   }),
 });
 
@@ -43,4 +57,6 @@ export const {
   useGetSingleProductQuery,
   useGetProductByCategoryQuery,
   useAddCartProductMutation,
+  useUpdateProductMutation,
+  useGetCartProductsQuery,
 } = baseApi;

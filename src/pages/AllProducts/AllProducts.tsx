@@ -86,7 +86,6 @@ function AllProduct() {
     setSelectedCategory("");
     setSelectedBrand("");
     setSelectedRating(0);
-    // Reset other filter states as needed
   };
 
   return (

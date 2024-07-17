@@ -17,9 +17,9 @@ interface ProductData {
 const AddProduct = () => {
   const [name, setName] = useState<string>("");
   const [category, setCategory] = useState<string>("");
-  const [stockQuantity, setStockQuantity] = useState<number>(0);
+  const [stockQuantity, setStockQuantity] = useState<number>(1);
   const [brand, setBrand] = useState<string>("");
-  const [rating, setRating] = useState<number>(0);
+  const [rating, setRating] = useState<number>(1);
   const [description, setDescription] = useState<string>("");
   const [price, setPrice] = useState<number>(0);
   const [image, setImage] = useState<string>("");
@@ -154,6 +154,7 @@ const AddProduct = () => {
             value={rating}
             onChange={(e) => setRating(Number(e.target.value))}
             type="number"
+            step="0.01"
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
             required
           />

@@ -10,3 +10,12 @@ export type TProduct = {
   image: string;
   product: string;
 };
+
+type TCartState = {
+  items: TProduct[];
+};
+
+// Define initial state
+export const initialState: TCartState = {
+  items: [],
+};
