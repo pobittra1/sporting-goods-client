@@ -1,6 +1,7 @@
 import { styles } from "@/css/styles";
 import logo from "../../assets/logo.png";
 import { Facebook, Linkedin, Send, Twitter } from "lucide-react";
+import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <footer
@@ -42,24 +43,30 @@ const Footer = () => {
             <h2 className="text-black text-2xl font-bold">Links</h2>
             <ul className="gap-2 flex flex-col">
               <li>
-                <a className={styles.underlineAnim} href="">
-                  All Products
-                </a>
+                <Link to={"/"} className={styles.underlineAnim}>
+                  Home
+                </Link>
               </li>
               <li>
-                <a className={styles.underlineAnim} href="">
+                <Link
+                  to={"/product/manage-product"}
+                  className={styles.underlineAnim}
+                >
                   Manage Products
-                </a>
+                </Link>
               </li>
               <li>
-                <a className={styles.underlineAnim} href="">
+                <Link
+                  to={"/product/carted-products"}
+                  className={styles.underlineAnim}
+                >
                   Cart
-                </a>
+                </Link>
               </li>
               <li>
-                <a className={styles.underlineAnim} href="">
+                <Link to={"/about-us"} className={styles.underlineAnim}>
                   About Us
-                </a>
+                </Link>
               </li>
             </ul>
           </div>

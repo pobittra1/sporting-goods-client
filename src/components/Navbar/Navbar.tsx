@@ -37,18 +37,24 @@ const Navbar = () => {
             </div>
             <div className="hidden sm:block sm:ml-6 mt-2">
               <div className="flex space-x-6">
-                <a href="#" className={`${styles.underlineAnim} `}>
+                <Link to={"/"} className={`${styles.underlineAnim} `}>
                   Home
-                </a>
-                <a href="#" className={`${styles.underlineAnim} `}>
-                  About
-                </a>
-                <a href="#" className={`${styles.underlineAnim} `}>
-                  Services
-                </a>
-                <a href="#" className={`${styles.underlineAnim} `}>
-                  Contact
-                </a>
+                </Link>
+                <Link
+                  to={"/product/manage-product"}
+                  className={`${styles.underlineAnim} `}
+                >
+                  Manage-products
+                </Link>
+                <Link
+                  to={"/product/carted-products"}
+                  className={`${styles.underlineAnim} `}
+                >
+                  Cart
+                </Link>
+                <Link to={"/about-us"} className={`${styles.underlineAnim} `}>
+                  About-us
+                </Link>
               </div>
             </div>
           </div>
@@ -65,23 +71,23 @@ const Navbar = () => {
             Home
           </Link>
           <Link
-            to={`/about-us`}
+            to={`/product/manage-product`}
             className="text-black hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
           >
-            About
+            Manage-products
           </Link>
-          <a
-            href="#"
+          <Link
+            to={"/product/carted-products"}
             className="text-black hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
           >
-            Services
-          </a>
-          <a
-            href="#"
+            Cart
+          </Link>
+          <Link
+            to={"/about-us"}
             className="text-black hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
           >
-            Contact
-          </a>
+            About-us
+          </Link>
         </div>
       </div>
     </nav>

@@ -187,7 +187,7 @@ function AllProduct() {
             <img
               className="w-full py-4 h-[220px] object-cover hover:scale-105 ease-in duration-100"
               src={card.image}
-              alt=""
+              alt="product image here"
             />
             <div className="flex justify-around">
               <div>

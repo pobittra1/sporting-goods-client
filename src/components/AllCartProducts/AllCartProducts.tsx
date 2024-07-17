@@ -1,10 +1,13 @@
 import { useGetCartProductsQuery } from "@/redux/api/baseApi";
-import { Link, Star } from "lucide-react";
+import { Star } from "lucide-react";
 import { Button } from "../ui/button";
-import { TProduct } from "@/types";
+import { TProductCart } from "@/types";
 import Rating from "react-rating";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
 function AllCartProducts() {
+  const [quantity, setQuantity] = useState(0);
   const { data, isLoading } = useGetCartProductsQuery({});
   if (isLoading) {
     return (
@@ -16,11 +19,12 @@ function AllCartProducts() {
     );
   }
   const mainData = data.data;
+
   console.log(mainData);
 
   return (
     <div className="card-grid grid grid-cols-1 md:grid-cols-3 gap-4 bg-white">
-      {mainData.map((card: TProduct) => (
+      {mainData.map((card: TProductCart) => (
         <div
           key={card._id}
           className="p-4 flex gap-2 flex-col  m-4 bg-white rounded-md"
@@ -43,8 +47,8 @@ function AllCartProducts() {
           </div>
           <img
             className="w-full py-4 h-[220px] object-cover hover:scale-105 ease-in duration-100"
-            src={card.image}
-            alt=""
+            src={card?.image}
+            alt="product image here"
           />
           <div className="flex justify-around">
             <div>
@@ -72,8 +76,24 @@ function AllCartProducts() {
               {card.description}
             </p>
           </div>
+          <div>
+            <p>
+              <span className="text-xl font-semibold capitalize mr-2">
+                Quantity:
+              </span>
+              {card.quantity}
+            </p>
+          </div>
+          <div>
+            <input
+              value={quantity}
+              onChange={(e) => setQuantity(Number(e.target.value))}
+              placeholder="Quantity"
+              type="number"
+            />
+          </div>
           <div className="see-more-button text-center my-2">
-            <Link to={`/product/${card?._id}`}>
+            <Link to={`/product/${card?.product}`}>
               <Button>View Details</Button>
             </Link>
           </div>
