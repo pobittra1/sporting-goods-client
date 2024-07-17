@@ -29,7 +29,7 @@ export const baseApi = createApi({
     }),
     addCartProduct: builder.mutation({
       query: (cartProduct) => ({
-        url: "/product/add-product-to-cart",
+        url: "product/add-product",
         method: "POST",
         body: cartProduct,
       }),

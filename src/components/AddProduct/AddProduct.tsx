@@ -1,23 +1,47 @@
-// src/components/AddProduct.js
 import { useAddCartProductMutation } from "@/redux/api/baseApi";
-import { useState } from "react";
+import { useState, useEffect, FormEvent } from "react";
 import { Button } from "../ui/button";
 import { toast } from "sonner";
 
-const AddProductCart = () => {
-  const [name, setName] = useState("");
-  const [category, setCategory] = useState("");
-  const [stockQuantity, setStockQuantity] = useState(0);
-  const [brand, setBrand] = useState("");
-  const [rating, setRating] = useState(0);
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState(0);
-  const [image, setImage] = useState("");
+interface ProductData {
+  name: string;
+  category: string;
+  stockQuantity: number;
+  brand: string;
+  rating: number;
+  description: string;
+  price: number;
+  image: string;
+}
+
+const AddProduct = () => {
+  const [name, setName] = useState<string>("");
+  const [category, setCategory] = useState<string>("");
+  const [stockQuantity, setStockQuantity] = useState<number>(0);
+  const [brand, setBrand] = useState<string>("");
+  const [rating, setRating] = useState<number>(0);
+  const [description, setDescription] = useState<string>("");
+  const [price, setPrice] = useState<number>(0);
+  const [image, setImage] = useState<string>("");
 
   const [addProduct] = useAddCartProductMutation();
 
-  const handleAddProduct = async () => {
-    const data = {
+  useEffect(() => {
+    console.log({
+      name,
+      category,
+      stockQuantity,
+      brand,
+      rating,
+      description,
+      price,
+      image,
+    });
+  }, [name, category, stockQuantity, brand, rating, description, price, image]);
+
+  const handleAddProduct = async (e: FormEvent) => {
+    e.preventDefault();
+    const data: ProductData = {
       name,
       category,
       stockQuantity,
@@ -27,15 +51,26 @@ const AddProductCart = () => {
       price,
       image,
     };
-    console.log(data);
+
     try {
-      const res = await addProduct({ data }).unwrap();
+      const res = await addProduct(data).unwrap();
       console.log(res);
       if (res?.success) {
         toast.success(res?.message);
+        setName("");
+        setCategory("");
+        setStockQuantity(0);
+        setBrand("");
+        setRating(0);
+        setDescription("");
+        setPrice(0);
+        setImage("");
+      } else {
+        toast.error("Failed to add product");
       }
     } catch (err) {
       console.error(err);
+      toast.error("An error occurred");
     }
   };
 
@@ -58,6 +93,7 @@ const AddProductCart = () => {
             value={name}
             onChange={(e) => setName(e.target.value)}
             className="mt-5 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+            required
           />
         </div>
         <div>
@@ -72,6 +108,7 @@ const AddProductCart = () => {
             value={category}
             onChange={(e) => setCategory(e.target.value)}
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+            required
           />
         </div>
         <div>
@@ -87,6 +124,7 @@ const AddProductCart = () => {
             onChange={(e) => setStockQuantity(Number(e.target.value))}
             type="number"
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+            required
           />
         </div>
         <div>
@@ -101,6 +139,7 @@ const AddProductCart = () => {
             value={brand}
             onChange={(e) => setBrand(e.target.value)}
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+            required
           />
         </div>
         <div>
@@ -114,7 +153,9 @@ const AddProductCart = () => {
             id="rating"
             value={rating}
             onChange={(e) => setRating(Number(e.target.value))}
+            type="number"
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+            required
           />
         </div>
         <div>
@@ -129,6 +170,7 @@ const AddProductCart = () => {
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+            required
           />
         </div>
         <div>
@@ -143,6 +185,7 @@ const AddProductCart = () => {
             value={price}
             onChange={(e) => setPrice(Number(e.target.value))}
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+            required
           />
         </div>
         <div>
@@ -157,11 +200,12 @@ const AddProductCart = () => {
             value={image}
             onChange={(e) => setImage(e.target.value)}
             className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+            required
           />
         </div>
         <Button
           type="submit"
-          className="w-full py-2 px-4 text-white rounded-md shadow-sm  focus:outline-none 0"
+          className="w-full py-2 px-4 text-white rounded-md shadow-sm focus:outline-none"
         >
           Add Product
         </Button>
@@ -170,4 +214,4 @@ const AddProductCart = () => {
   );
 };
 
-export default AddProductCart;
+export default AddProduct;
