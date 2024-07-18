@@ -3,8 +3,10 @@ import { Button } from "../ui/button";
 import { TUser } from "@/types";
 import { useAddUserMutation } from "@/redux/api/baseApi";
 import { toast } from "sonner";
+import { useNavigate } from "react-router-dom";
 
 const UserDetails = () => {
+  const navigate = useNavigate();
   const [addUser] = useAddUserMutation();
   const [user, setUser] = useState<TUser>({
     name: "",
@@ -32,7 +34,8 @@ const UserDetails = () => {
       phone: "",
       deliveryAddress: "",
     });
-    toast.success("user added succesfully");
+    toast.success("Placing order succesfully");
+    navigate("/");
   };
 
   return (
@@ -107,7 +110,7 @@ const UserDetails = () => {
             type="submit"
             className="w-full py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white focus:outline-none focus:ring-2 focus:ring-offset-2 "
           >
-            Submit
+            Place Order
           </Button>
         </div>
       </form>
