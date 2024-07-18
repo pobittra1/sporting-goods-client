@@ -35,7 +35,7 @@ const UserDetails = () => {
       deliveryAddress: "",
     });
     toast.success("Placing order succesfully");
-    navigate("/");
+    navigate("/success");
   };
 
   return (
