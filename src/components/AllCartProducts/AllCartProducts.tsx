@@ -2,7 +2,6 @@ import {
   useDecreaseQuantityMutation,
   useGetCartProductsQuery,
   useIncreaseQuantityMutation,
-  // useUpdateQuantityMutation,
 } from "@/redux/api/baseApi";
 import { Star } from "lucide-react";
 import { Button } from "../ui/button";
@@ -28,7 +27,7 @@ function AllCartProducts() {
   const mainData = data.data;
 
   return (
-    <div className="card-grid grid grid-cols-1 md:grid-cols-3 gap-4 bg-white">
+    <div className="card-grid grid grid-cols-1 md:grid-cols-3 gap-4 bg-white border-2 m-2">
       {mainData.map((card: TProductCart) => (
         <div
           key={card._id}
