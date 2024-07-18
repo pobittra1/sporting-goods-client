@@ -1,22 +1,20 @@
 import {
+  useDecreaseQuantityMutation,
   useGetCartProductsQuery,
-  useUpdateQuantityMutation,
+  useIncreaseQuantityMutation,
+  // useUpdateQuantityMutation,
 } from "@/redux/api/baseApi";
 import { Star } from "lucide-react";
 import { Button } from "../ui/button";
 import { TProductCart } from "@/types";
 import Rating from "react-rating";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 
 function AllCartProducts() {
   const { data, isLoading } = useGetCartProductsQuery({});
-  const [quantities, setQuantities] = useState<{ [key: string]: number }>({});
-  const [genuineUpdatedQuantity] = useUpdateQuantityMutation();
-  console.log(quantities);
+  const [increaseQuantity] = useIncreaseQuantityMutation();
+  const [decreaseQuantity] = useDecreaseQuantityMutation();
 
-  // implement here -----------------------------
-  console.log(Object.values(quantities));
   if (isLoading) {
     return (
       <div>
@@ -28,42 +26,6 @@ function AllCartProducts() {
   }
 
   const mainData = data.data;
-  // console.log(mainData);
-  // const updatedQuantity = Object.values(quantities)[0];
-  const handleIncrease = (id: string) => {
-    const newQuantity = (quantities[id] || 0) + 1;
-    setQuantities((prevQuantities) => ({
-      ...prevQuantities,
-      [id]: newQuantity,
-    }));
-    updateQuantity(id, newQuantity);
-  };
-
-  const handleDecrease = (id: string) => {
-    const newQuantity = Math.max((quantities[id] || 0) - 1, 0);
-    setQuantities((prevQuantities) => ({
-      ...prevQuantities,
-      [id]: newQuantity,
-    }));
-    updateQuantity(id, newQuantity);
-  };
-
-  const handleQuantityChange = (id: string, value: number) => {
-    setQuantities((prevQuantities) => ({
-      ...prevQuantities,
-      [id]: value,
-    }));
-    updateQuantity(id, value);
-  };
-
-  const updateQuantity = async (id: string, quantity: number) => {
-    const data = {
-      quantity: quantity,
-    };
-    console.log("form", data);
-    const du = await genuineUpdatedQuantity({ id, data });
-    console.log(du);
-  };
 
   return (
     <div className="card-grid grid grid-cols-1 md:grid-cols-3 gap-4 bg-white">
@@ -128,27 +90,19 @@ function AllCartProducts() {
             </p>
           </div>
           <div className="flex items-center gap-2">
-            <button
-              onClick={() => handleDecrease(card._id)}
-              className="bg-gray-200 px-2 py-1 rounded"
+            <Button
+              onClick={() => decreaseQuantity(card._id)}
+              className="px-2 py-1 rounded"
             >
-              -
-            </button>
-            <input
-              value={quantities[card._id] || 0}
-              onChange={(e) =>
-                handleQuantityChange(card._id, Number(e.target.value))
-              }
-              placeholder="Quantity"
-              type="number"
-              className="w-12 text-center"
-            />
-            <button
-              onClick={() => handleIncrease(card._id)}
-              className="bg-gray-200 px-2 py-1 rounded"
+              Decrease
+            </Button>
+
+            <Button
+              onClick={() => increaseQuantity(card._id)}
+              className=" px-2 py-1 rounded"
             >
-              +
-            </button>
+              Increase
+            </Button>
           </div>
           <div className="see-more-button text-center my-2">
             <Link to={`/product/${card?.product}`}>

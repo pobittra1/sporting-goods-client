@@ -52,15 +52,36 @@ export const baseApi = createApi({
       }),
       providesTags: ["product"],
     }),
-    updateQuantity: builder.mutation({
-      query: ({ id, data }) => {
-        console.log(id, data);
+    // updateQuantity: builder.mutation({
+    //   query: ({ id, data }) => {
+    //     console.log(id, data);
+    //     return {
+    //       url: `/product/quantity/${id}`,
+    //       method: "PATCH",
+    //       body: data,
+    //     };
+    //   },
+    //   invalidatesTags: ["product"],
+    // }),
+    increaseQuantity: builder.mutation({
+      query: (id) => {
+        console.log(id);
         return {
-          url: `/product/quantity/${id}`,
+          url: `/product/quantity/increase/${id}`,
           method: "PATCH",
-          body: data,
         };
       },
+      invalidatesTags: ["product"],
+    }),
+    decreaseQuantity: builder.mutation({
+      query: (id) => {
+        console.log(id);
+        return {
+          url: `/product/quantity/decrease/${id}`,
+          method: "PATCH",
+        };
+      },
+      invalidatesTags: ["product"],
     }),
   }),
 });
@@ -72,5 +93,7 @@ export const {
   useAddCartProductMutation,
   useUpdateProductMutation,
   useGetCartProductsQuery,
-  useUpdateQuantityMutation,
+  // useUpdateQuantityMutation,
+  useIncreaseQuantityMutation,
+  useDecreaseQuantityMutation,
 } = baseApi;
