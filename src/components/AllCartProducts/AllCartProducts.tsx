@@ -105,7 +105,7 @@ function AllCartProducts() {
           </div>
           <div className="see-more-button text-center my-6">
             <Link
-              to={`/product/${card?.product}`}
+              to={`/checkout`}
               className={`${
                 card.quantity > card.stockQuantity ? "pointer-events-none" : ""
               }`}

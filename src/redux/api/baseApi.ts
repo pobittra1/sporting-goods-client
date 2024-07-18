@@ -29,9 +29,8 @@ export const baseApi = createApi({
     }),
     addCartProduct: builder.mutation({
       query: (cartProduct) => {
-        console.log(cartProduct);
         return {
-          url: "product/add-product",
+          url: "/product/add-product",
           method: "POST",
           body: cartProduct,
         };
@@ -40,7 +39,7 @@ export const baseApi = createApi({
     }),
     updateProduct: builder.mutation({
       query: ({ id, ...updatedProduct }) => ({
-        url: `product/${id}`,
+        url: `/product/${id}`,
         method: "PATCH",
         body: updatedProduct,
       }),
@@ -52,17 +51,6 @@ export const baseApi = createApi({
       }),
       providesTags: ["product"],
     }),
-    // updateQuantity: builder.mutation({
-    //   query: ({ id, data }) => {
-    //     console.log(id, data);
-    //     return {
-    //       url: `/product/quantity/${id}`,
-    //       method: "PATCH",
-    //       body: data,
-    //     };
-    //   },
-    //   invalidatesTags: ["product"],
-    // }),
     increaseQuantity: builder.mutation({
       query: (id) => {
         console.log(id);
@@ -83,6 +71,16 @@ export const baseApi = createApi({
       },
       invalidatesTags: ["product"],
     }),
+    addUser: builder.mutation({
+      query: (user) => {
+        return {
+          url: "/user/add-user",
+          method: "POST",
+          body: user,
+        };
+      },
+      invalidatesTags: ["product"],
+    }),
   }),
 });
 
@@ -93,7 +91,7 @@ export const {
   useAddCartProductMutation,
   useUpdateProductMutation,
   useGetCartProductsQuery,
-  // useUpdateQuantityMutation,
   useIncreaseQuantityMutation,
   useDecreaseQuantityMutation,
+  useAddUserMutation,
 } = baseApi;

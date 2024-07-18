@@ -24,6 +24,13 @@ export type TProductCart = {
   stockQuantity: number;
 };
 
+export type TUser = {
+  name: string;
+  email: string;
+  phone: string;
+  deliveryAddress: string;
+};
+
 type TCartState = {
   items: TProduct[];
 };
