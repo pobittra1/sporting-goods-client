@@ -103,9 +103,22 @@ function AllCartProducts() {
               Increase
             </Button>
           </div>
-          <div className="see-more-button text-center my-2">
-            <Link to={`/product/${card?.product}`}>
-              <Button>View Details</Button>
+          <div className="see-more-button text-center my-6">
+            <Link
+              to={`/product/${card?.product}`}
+              className={`${
+                card.quantity > card.stockQuantity ? "pointer-events-none" : ""
+              }`}
+            >
+              <Button
+                className={`${
+                  card.quantity > card.stockQuantity
+                    ? "line-through bg-transparent border-2 text-black hover:text-white"
+                    : "bg-transparent border-2 text-black hover:text-white"
+                }`}
+              >
+                Proceed To Checkout
+              </Button>
             </Link>
           </div>
         </div>

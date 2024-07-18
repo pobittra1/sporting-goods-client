@@ -4,17 +4,6 @@ import { Button } from "../ui/button";
 import { Star } from "lucide-react";
 import Rating from "react-rating";
 
-// type ProductCardProps = {
-//   name: string;
-//   category: string;
-//   quantity: number;
-//   brand: string;
-//   rating: number;
-//   description: string;
-//   price: number;
-//   image: string;
-// };
-
 const CardDetails = () => {
   const productId = useParams();
   const { data, isLoading } = useGetSingleProductQuery(productId);
